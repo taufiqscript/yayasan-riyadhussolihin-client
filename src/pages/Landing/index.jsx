@@ -354,7 +354,7 @@ const Landing = () => {
                             </p>
 
                             <button
-                                onClick={() => navigate('/donasi')}
+                                onClick={() => location.replace('/donasi')}
                                 className="mt-8 block w-full bg-gradient-to-r from-green-600 to-emerald-500 hover:opacity-95 px-4 py-3 rounded-2xl text-white font-black transition-all shadow-xl"
                             >
                                 Donasi Renovasi Sekarang

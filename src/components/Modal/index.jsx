@@ -129,6 +129,7 @@ const Modal = ({ openPayment, data, nama, setNama, phone, setPhone, email, setEm
                                 nominal,
                                 phone,
                                 email,
+                                pesan,
                                 setTotalDonation,
                                 navigate,
                                 setNotifMidtransStorage,

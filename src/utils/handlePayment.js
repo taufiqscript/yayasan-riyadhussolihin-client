@@ -1,7 +1,7 @@
 import { apiInstanceExpress } from "./apiInstance"
 import { handleNotification } from "./handleNotification"
 
-export const handlePayment = async ({ nama, phone, nominal, email, navigate, setNotifMidtransStorage, setLastDonationName }) => {
+export const handlePayment = async ({ nama, phone, nominal, email, pesan, navigate, setNotifMidtransStorage, setLastDonationName }) => {
     if (!nama || !phone || !email || nominal < 1000) {
         alert('Mohon isi nama, no WA, dan nominal donasi minimal Rp. 1.000')
         return
@@ -16,7 +16,9 @@ export const handlePayment = async ({ nama, phone, nominal, email, navigate, set
             name: nama,
             phone,
             email,
+            pesan
         })
+        console.log(response)
         setLastDonationName(response.data.data.name)
         const token = response.data.data.token
 

@@ -186,42 +186,63 @@ const Donasi = () => {
                                         Berikut adalah update terbaru dari proses renovasi dan pembangunan yayasan.
                                     </p>
 
-                                    <div className="mt-8 space-y-6 border-l-4 border-green-600 pl-6">
-                                        <div>
-                                            <h4 className="font-black text-gray-800">
-                                                🔨 Tahap 1 - Perbaikan Struktur Bangunan
-                                            </h4>
-                                            <p className="text-gray-600 mt-2 text-sm">
-                                                Proses perbaikan struktur utama sudah dimulai untuk memastikan bangunan lebih kokoh dan aman.
-                                            </p>
+                                    {/* FOTO UPDATE */}
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8">
+
+                                        <div className="overflow-hidden rounded-3xl shadow-lg border border-gray-100">
+                                            <img
+                                                src="/program-donasi/kabar-1.jpeg"
+                                                className="w-full h-[260px] object-cover hover:scale-105 transition duration-500"
+                                            />
+
+                                            <div className="p-5">
+                                                <h4 className="font-black text-gray-800">
+                                                    🏗️ Progres Renovasi Atap Yayasan
+                                                </h4>
+
+                                                <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+                                                    Pemasangan atap baru untuk bangunan yayasan telah selesai dilakukan
+                                                    agar kegiatan belajar lebih aman dan nyaman.
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <div>
-                                            <h4 className="font-black text-gray-800">
-                                                🧱 Tahap 2 - Renovasi Ruang Belajar
-                                            </h4>
-                                            <p className="text-gray-600 mt-2 text-sm">
-                                                Renovasi ruang belajar dilakukan agar anak-anak bisa belajar dengan lebih nyaman dan rapi.
-                                            </p>
+                                        <div className="overflow-hidden rounded-3xl shadow-lg border border-gray-100">
+                                            <img
+                                                src="/program-donasi/kabar-2.jpeg"
+                                                className="w-full h-[260px] object-cover hover:scale-105 transition duration-500"
+                                            />
+
+                                            <div className="p-5">
+                                                <h4 className="font-black text-gray-800">
+                                                    🕌 Area Musholla & Rooftop
+                                                </h4>
+
+                                                <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+                                                    Area musholla dan bagian rooftop sedang dalam tahap perapihan
+                                                    untuk menunjang kegiatan ibadah anak-anak yatim.
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <div>
-                                            <h4 className="font-black text-gray-800">
-                                                🕌 Tahap 3 - Perbaikan Musholla
-                                            </h4>
-                                            <p className="text-gray-600 mt-2 text-sm">
-                                                Musholla sedang dalam tahap penataan ulang, termasuk pengadaan karpet dan perlengkapan ibadah.
-                                            </p>
+                                        <div className="overflow-hidden rounded-3xl shadow-lg border border-gray-100 md:col-span-2">
+                                            <img
+                                                src="/program-donasi/kabar-3.jpeg"
+                                                className="w-full h-[340px] object-cover hover:scale-105 transition duration-500"
+                                            />
+
+                                            <div className="p-5">
+                                                <h4 className="font-black text-gray-800">
+                                                    ✨ Tampilan Terbaru Bangunan Yayasan
+                                                </h4>
+
+                                                <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+                                                    Alhamdulillah proses pembangunan terus berjalan dengan baik.
+                                                    Terima kasih kepada seluruh donatur yang telah membantu renovasi yayasan.
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <div>
-                                            <h4 className="font-black text-gray-800">
-                                                📌 Tahap 4 - Pengadaan Sarana Anak Yatim
-                                            </h4>
-                                            <p className="text-gray-600 mt-2 text-sm">
-                                                Pengadaan meja belajar, kitab, Al-Qur’an, dan kebutuhan harian anak-anak yatim terus berjalan.
-                                            </p>
-                                        </div>
                                     </div>
                                 </div>
                             )}
