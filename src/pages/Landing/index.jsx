@@ -403,11 +403,16 @@ const Landing = () => {
 
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                                <div className="absolute bottom-8 left-8 text-white">
-                                    <p className="text-sm opacity-80">Dana Terkumpul</p>
-                                    <h3 className="text-3xl md:text-4xl font-black">
-                                        Rp -
+                                {/* GANTI DANA TERKUMPUL */}
+                                <div className="absolute bottom-8 left-8 text-white max-w-lg">
+                                    <h3 className="text-2xl md:text-3xl font-black leading-snug">
+                                        Bersama Kita Wujudkan Tempat Belajar yang Nyaman & Penuh Harapan
                                     </h3>
+
+                                    <p className="mt-3 text-sm md:text-base text-white/80 leading-relaxed">
+                                        Setiap bantuan yang diberikan akan menjadi amal jariyah
+                                        untuk masa depan anak-anak yatim dan dhuafa.
+                                    </p>
                                 </div>
                             </div>
 
@@ -424,41 +429,9 @@ const Landing = () => {
                                     dengan nyaman, aman, dan penuh semangat setiap hari.
                                 </p>
 
-                                {/* STATS */}
-                                <div className="grid grid-cols-3 gap-6 mt-10 text-center">
-                                    <div>
-                                        <p className="text-2xl font-black text-emerald-600">-</p>
-                                        <p className="text-sm text-gray-500">Donatur</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-2xl font-black text-emerald-600">-%</p>
-                                        <p className="text-sm text-gray-500">Tercapai</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-2xl font-black text-emerald-600">-%</p>
-                                        <p className="text-sm text-gray-500">Kurang</p>
-                                    </div>
-                                </div>
-
-                                {/* PROGRESS */}
-                                <div className="mt-10">
-                                    <div className="flex justify-between text-sm font-semibold text-gray-700">
-                                        <span>Rp -</span>
-                                    </div>
-
-                                    <div className="relative w-full h-4 bg-gray-200 rounded-full mt-4 overflow-hidden">
-                                        <motion.div
-                                            initial={{ width: 0 }}
-                                            whileInView={{ width: "45%" }}
-                                            transition={{ duration: 1.2 }}
-                                            className="h-full bg-gradient-to-r from-green-500 via-emerald-400 to-green-600 rounded-full"
-                                        />
-                                    </div>
-                                </div>
-
                                 {/* CTA */}
                                 <button
-                                    onClick={() => navigate("/donasi")}
+                                    onClick={() => location.replace("/donasi")}
                                     className="mt-12 w-full py-4 rounded-2xl bg-gradient-to-r from-green-600 to-emerald-500 text-white font-black text-lg shadow-xl hover:scale-[1.02] transition-all"
                                 >
                                     💚 Donasi Sekarang

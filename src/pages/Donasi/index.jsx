@@ -263,11 +263,16 @@ const Donasi = () => {
                         <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-6">
                             <div className="space-y-4 font-semibold text-[16px] text-gray-600">
                                 <div className='flex items-center gap-2'>
-                                    {totalDonation[0] && (
+                                    {totalDonation[0] ? (
                                         <p>
                                             {formatCurrency(totalDonation[0]?.totalAmount)}
                                         </p>
-                                    )}                                    
+                                    )
+                                        :
+                                        (
+                                            <span className='loading loading-dots loading-xs' />
+                                        )
+                                    }                                    
                                     <p className='text-[11px] font-normal'>
                                         terkumpul
                                     </p>
@@ -276,10 +281,18 @@ const Donasi = () => {
                                 <div className='bg-gray-300/30 mt-1 w-full h-3 rounded-full'>
                                     <div className='bg-[#4CBB17] w-[10%] h-full rounded-full' />
                                 </div>
-                                {totalDonation[0] && (
+                                {totalDonation[0] ? (
                                     <p className='text-[12px]'>
                                         {totalDonation[0]?.totalTransaksi} Donasi</p>
-                                )}
+                                )
+                                    :
+                                    (
+                                        <div className='flex items-center gap-1.5'>
+                                            <span className='loading loading-dots loading-xs' />
+                                            <p className='text-[12px]'>Donasi</p>
+                                        </div>
+                                    )
+                                }
                                 <button
                                     onClick={() => setOpenPayment(true)}
                                     className='bg-green-600 hover:bg-green-700 cursor-pointer transition-all py-3 w-full text-white font-semibold rounded-lg'
