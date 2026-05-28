@@ -1,9 +1,12 @@
 import Modal from '@/components/Modal'
 import { dataAtom } from '@/jotai/atoms'
+import CarouselLayout from '@/layouts/CarouselLayout'
+import EachUtils from '@/utils/EachUtils'
+import { getMessage } from '@/utils/getMessage'
 import { getTotalByPaymentType } from '@/utils/getTotalByPaymentType'
 import { useAtom } from 'jotai'
 import React, { useEffect, useState } from 'react'
-import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa'
+import { FaCopy, FaDownload, FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa'
 import { HiArrowNarrowLeft } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 
@@ -14,11 +17,15 @@ const Donasi = () => {
     const [openPayment, setOpenPayment] = useState(false)
     const [nominal, setNominal] = useState(0)
     const [totalDonation, setTotalDonation] = useState([])
+    const [message, setMessage] = useState([])
 
     const [nama, setNama] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
     const [pesan, setPesan] = useState('')
+
+    const [showQRIS, setShowQRIS] = useState(false);
+    const [copied, setCopied] = useState(false);
 
     const [data, setData] = useAtom(dataAtom)
 
@@ -34,11 +41,59 @@ const Donasi = () => {
         }
     }
 
+    const fetchMyMessage = async () => {
+        try {
+            const result = await getMessage()
+
+            setMessage(result)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const rekening = "7776644228"
+
+    const handleCopyRekening = async () => {
+        try {
+            await navigator.clipboard.writeText(rekening);
+
+            setCopied(true);
+
+            setTimeout(() => {
+                setCopied(false);
+            }, 2000);
+
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const downloadQRIS = () => {
+        const link = document.createElement("a");
+
+        link.href = "/program-donasi/qris.jpg";
+        link.download = "qris-yayasan-riyadhussolihin.jpg";
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+    };
+
+    useEffect(() => {
+        if (select === "donatur") {
+            fetchMyMessage()
+        }
+    }, [select])
+
     useEffect(() => {
         getTotalByPaymentType().then(result => setTotalDonation(result))
     }, [])
 
+
     return (
+
         <div className="relative min-h-screen w-full bg-gray-50">
 
             {/* HERO SECTION */}
@@ -250,26 +305,76 @@ const Donasi = () => {
                             {/* DONATUR */}
                             {select === "donatur" && (
                                 <div>
-                                    <h3 className="text-2xl font-black text-gray-800">
-                                        Daftar Donatur (Terima Kasih ❤️)
-                                    </h3>
+                                    {/* HEADER */}
+                                    <div className="mb-8">
+                                        <h3 className="text-2xl md:text-3xl font-black text-gray-800">
+                                            Daftar Donatur ❤️
+                                        </h3>
 
-                                    <p className="mt-4 text-gray-600 leading-relaxed text-sm md:text-base">
-                                        Berikut sebagian donatur yang telah membantu program pembangunan yayasan.
-                                        Semoga Allah membalas dengan keberkahan yang berlipat.
-                                    </p>
+                                        <p className="mt-3 text-gray-600 leading-relaxed text-sm md:text-base">
+                                            Terima kasih kepada seluruh donatur yang telah membantu
+                                            pembangunan Yayasan Riyadhussolihin.
+                                            Semoga menjadi amal jariyah yang terus mengalir.
+                                        </p>
+                                    </div>
 
-                                    <div className="mt-8 space-y-4">
-                                        <div
-                                            className="flex justify-between items-center bg-gray-50 border border-gray-200 rounded-2xl px-5 py-4"
-                                        >
-                                            <p className="font-bold text-gray-800">
-                                                Hamba Allah
-                                            </p>
-                                            <p className="font-black text-green-700">
-                                                -
-                                            </p>
-                                        </div>
+                                    {/* LIST DONATUR */}
+                                    <div className="space-y-5">
+
+                                        <EachUtils
+                                            of={message}
+                                            render={(item, index) => (
+
+                                                <div
+                                                    key={index}
+                                                    className="group bg-white border border-gray-100 rounded-3xl p-5 shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
+                                                >
+
+                                                    {/* TOP */}
+                                                    <div className="flex items-start justify-between gap-4">
+
+                                                        {/* LEFT */}
+                                                        <div className="flex items-center gap-4">
+
+                                                            {/* AVATAR */}
+                                                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-green-500 to-emerald-400 flex items-center justify-center text-white font-black text-xl shadow-lg">
+                                                                {item?.name?.charAt(0)?.toUpperCase() || "H"}
+                                                            </div>
+
+                                                            {/* INFO */}
+                                                            <div>
+                                                                <h4 className="font-black text-gray-800 text-lg">
+                                                                    {item.name || "Hamba Allah"}
+                                                                </h4>
+
+                                                                <p className="text-sm text-gray-400">
+                                                                    Donatur Baik
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+                                                        {/* BADGE */}
+                                                        <div className="bg-green-50 text-green-700 border border-green-100 px-3 py-1 rounded-full text-xs font-bold">
+                                                            💚 Berdonasi
+                                                        </div>
+
+                                                    </div>
+
+                                                    {/* PESAN */}
+                                                    {item.pesan && (
+                                                        <div className="mt-5 bg-gray-50 border border-gray-100 rounded-2xl p-4">
+                                                            <p className="text-gray-600 italic leading-relaxed text-sm md:text-base">
+                                                                "
+                                                                {item.pesan}
+                                                                "
+                                                            </p>
+                                                        </div>
+                                                    )}
+
+                                                </div>
+                                            )}
+                                        />
+
                                     </div>
                                 </div>
                             )}
@@ -280,94 +385,211 @@ const Donasi = () => {
                     {/* SIDEBAR */}
                     <aside className="space-y-8">
 
-                        {/* DAFTAR DONASI / BERITA */}
-                        <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-6">
-                            <div className="space-y-4 font-semibold text-[16px] text-gray-600">
-                                <div className='flex items-center gap-2'>
+                        {/* TOTAL DONASI */}
+                        <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-7">
+
+                            <div className="flex items-center justify-between">
+
+                                <div>
+                                    <p className="text-sm text-gray-500 font-medium">
+                                        Dana Terkumpul
+                                    </p>
+
                                     {totalDonation[0] ? (
-                                        <p>
+                                        <h3 className="text-2xl md:text-3xl font-black text-green-700 mt-1">
                                             {formatCurrency(totalDonation[0]?.totalAmount)}
-                                        </p>
-                                    )
-                                        :
-                                        (
-                                            <span className='loading loading-dots loading-xs' />
-                                        )
-                                    }                                    
-                                    <p className='text-[11px] font-normal'>
-                                        terkumpul
+                                        </h3>
+                                    ) : (
+                                        <span className="loading loading-dots loading-md text-green-600" />
+                                    )}
+                                </div>
+
+                                <div className="text-right">
+                                    <p className="text-sm text-gray-500 font-medium">
+                                        Total Donatur
+                                    </p>
+
+                                    {totalDonation[0] ? (
+                                        <h3 className="text-2xl font-black text-gray-800 mt-1">
+                                            {totalDonation[0]?.totalTransaksi}
+                                        </h3>
+                                    ) : (
+                                        <span className="loading loading-dots loading-md text-green-600" />
+                                    )}
+                                </div>
+
+                            </div>
+
+                            <button
+                                onClick={() => setOpenPayment(true)}
+                                className="mt-7 bg-gradient-to-r from-green-600 to-emerald-500 hover:scale-[1.02] transition-all duration-300 py-4 w-full text-white font-black rounded-2xl shadow-lg"
+                            >
+                                💚 Donasi Sekarang
+                            </button>
+
+                        </div>
+
+                        {/* QRIS CARD */}
+                        <div className="relative overflow-hidden bg-white dark:bg-gray-900 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-800 p-6 transition-all duration-500">
+
+                            {/* BADGE */}
+                            <div className="absolute top-4 right-4 bg-gradient-to-r from-green-600 to-emerald-500 text-white text-xs px-4 py-1 rounded-full font-bold shadow animate-pulse">
+                                QRIS
+                            </div>
+
+                            {/* HEADER */}
+                            <div className="text-center">
+
+                                <h3 className="text-2xl font-black text-gray-800 dark:text-white">
+                                    Scan & Donasi
+                                </h3>
+
+                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 leading-relaxed">
+                                    Mendukung pembangunan yayasan menjadi lebih mudah
+                                    melalui QRIS semua pembayaran.
+                                </p>
+
+                            </div>
+
+                            {/* QR IMAGE */}
+                            <div className="mt-6 flex justify-center">
+
+                                <div
+                                    onClick={() => setShowQRIS(true)}
+                                    className="
+                group
+                cursor-pointer
+                relative
+                bg-gradient-to-br
+                from-gray-50
+                to-gray-100
+                dark:from-gray-800
+                dark:to-gray-900
+                border
+                border-gray-200
+                dark:border-gray-700
+                rounded-[2rem]
+                p-4
+                shadow-inner
+                hover:scale-[1.05]
+                hover:-translate-y-1
+                transition-all
+                duration-500
+            "
+                                >
+
+                                    {/* Glow Hover */}
+                                    <div className="absolute inset-0 rounded-[2rem] bg-green-500/0 group-hover:bg-green-500/10 blur-2xl transition-all duration-500" />
+
+                                    <img
+                                        src="/program-donasi/qris.jpg"
+                                        alt="QRIS"
+                                        className="relative z-10 w-full max-w-[260px] rounded-2xl object-cover group-hover:rotate-1 transition-all duration-500"
+                                    />
+
+                                </div>
+
+                            </div>
+
+                            {/* ACTION BUTTON */}
+                            <div className="mt-5 grid grid-cols-2 gap-3">
+
+                                <button
+                                    onClick={downloadQRIS}
+                                    className="flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-green-600 hover:text-white transition-all duration-300 py-3 rounded-2xl font-bold"
+                                >
+                                    <FaDownload />
+                                    Download
+                                </button>
+
+                                <button
+                                    onClick={() => setShowQRIS(true)}
+                                    className="flex items-center justify-center gap-2 bg-green-600 text-white hover:scale-[1.03] transition-all duration-300 py-3 rounded-2xl font-bold"
+                                >
+                                    Fullscreen
+                                </button>
+
+                            </div>
+
+                            {/* INFO */}
+                            <div className="mt-6 space-y-3">
+
+                                <div className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 rounded-2xl px-4 py-3">
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                                        Penerima
+                                    </p>
+
+                                    <p className="font-black text-gray-800 dark:text-white text-sm text-right">
+                                        Yayasan Riyadhussolihin
                                     </p>
                                 </div>
 
-                                <div className='bg-gray-300/30 mt-1 w-full h-3 rounded-full'>
-                                    <div className='bg-[#4CBB17] w-[10%] h-full rounded-full' />
+                                <div className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 rounded-2xl px-4 py-3">
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                                        Metode
+                                    </p>
+
+                                    <p className="font-bold text-green-700 text-sm">
+                                        QRIS All Payment
+                                    </p>
                                 </div>
-                                {totalDonation[0] ? (
-                                    <p className='text-[12px]'>
-                                        {totalDonation[0]?.totalTransaksi} Donasi</p>
-                                )
-                                    :
-                                    (
-                                        <div className='flex items-center gap-1.5'>
-                                            <span className='loading loading-dots loading-xs' />
-                                            <p className='text-[12px]'>Donasi</p>
-                                        </div>
-                                    )
-                                }
-                                <button
-                                    onClick={() => setOpenPayment(true)}
-                                    className='bg-green-600 hover:bg-green-700 cursor-pointer transition-all py-3 w-full text-white font-semibold rounded-lg'
-                                >
-                                    Donasi Sekarang
-                                </button>
-                            </div>
-                        </div>
 
-                        {/* DONASI CARD */}
-                        <div className="bg-gradient-to-br from-green-700 to-emerald-500 rounded-3xl shadow-xl p-7 text-white">
-                            <h3 className="text-xl font-black">
-                                Salurkan Donasi Anda
-                            </h3>
-
-                            <p className="mt-3 text-white/90 text-sm leading-relaxed">
-                                Donasi Anda membantu pembangunan yayasan, pendidikan anak yatim,
-                                dan kegiatan sosial Yayasan Riyadhussolihin.
-                            </p>
-
-                            <div className="mt-6 bg-white/15 rounded-2xl p-4 backdrop-blur-md">
-                                <p className="text-sm font-bold">📌 Rekening Donasi</p>
-                                <p className="mt-2 text-sm text-white/90">
-                                    Bank: <span className="font-black">BSI</span>
-                                </p>
-                                <p className="text-sm text-white/90">
-                                    No Rekening: <span className="font-black">7776644228</span>
-                                </p>
-                                <p className="text-sm text-white/90">
-                                    A/N: <span className="font-black">Yayasan Riyadhussolihin</span>
-                                </p>
                             </div>
 
+                            {/* CTA */}
                             <a
                                 href="https://wa.me/6281905056908"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="mt-6 block text-center bg-white text-green-700 font-black py-3 rounded-2xl hover:bg-gray-100 transition-all shadow-lg"
+                                className="mt-6 block text-center bg-gradient-to-r from-green-600 to-emerald-500 hover:scale-[1.02] transition-all duration-300 py-4 text-white font-black rounded-2xl shadow-lg"
                             >
-                                Konfirmasi Donasi via WhatsApp
+                                Konfirmasi Donasi
                             </a>
 
-                            <p className="text-xs mt-4 text-white/80 text-center leading-relaxed">
-                                * Setelah transfer, silakan konfirmasi melalui WhatsApp agar donasi tercatat.
+                        </div>
+
+                        {/* REKENING */}
+                        <div className="mt-5">
+
+                            <p className="text-sm">
+                                Nomor Rekening
                             </p>
+
+                            <div className="flex items-center justify-between gap-3 mt-2">
+
+                                <h4 className="font-black text-2xl tracking-wide">
+                                    {rekening}
+                                </h4>
+
+                                <button
+                                    onClick={handleCopyRekening}
+                                    className="
+                flex items-center gap-2
+                bg-white text-green-700
+                hover:scale-105
+                transition-all duration-300
+                px-4 py-2 rounded-xl
+                font-bold text-sm
+            "
+                                >
+                                    <FaCopy />
+
+                                    {copied ? "Copied!" : "Copy"}
+                                </button>
+
+                            </div>
+
                         </div>
 
                         {/* SOSMED */}
                         <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-6">
-                            <h3 className="font-black text-xl text-gray-800 mb-4">
+
+                            <h3 className="font-black text-xl text-gray-800 mb-5">
                                 Ikuti Kami
                             </h3>
 
                             <div className="flex gap-4">
+
                                 <a
                                     href="#"
                                     className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-green-600 hover:text-white transition-all"
@@ -390,12 +612,65 @@ const Donasi = () => {
                                 >
                                     <FaWhatsapp className="text-xl" />
                                 </a>
+
                             </div>
+
                         </div>
 
                     </aside>
                 </div>
             </main>
+
+            {
+                showQRIS && (
+                    <div
+                        onClick={() => setShowQRIS(false)}
+                        className="
+                fixed inset-0 z-[999]
+                bg-black/90
+                backdrop-blur-md
+                flex items-center justify-center
+                p-5
+                animate-fadeIn
+            "
+                    >
+
+                        <div
+                            className="relative"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+
+                            <img
+                                src="/program-donasi/qris.jpg"
+                                alt="QRIS"
+                                className="
+                        max-w-full
+                        md:max-w-[500px]
+                        rounded-3xl
+                        shadow-2xl
+                        animate-scaleIn
+                    "
+                            />
+
+                            <button
+                                onClick={() => setShowQRIS(false)}
+                                className="
+                        absolute -top-4 -right-4
+                        w-12 h-12
+                        rounded-full
+                        bg-white text-black
+                        font-black
+                        shadow-lg
+                    "
+                            >
+                                ✕
+                            </button>
+
+                        </div>
+
+                    </div>
+                )
+            }
 
             <Modal
                 data={data}
