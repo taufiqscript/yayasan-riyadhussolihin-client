@@ -64,23 +64,18 @@ const Landing = () => {
                 {!scrolled && (
                     <div className="hidden md:flex items-center justify-between max-w-7xl mx-auto px-6 md:px-10 py-3">
                         <div className="flex items-center gap-3">
-                            <a
-                                href="#"
-                                className="bg-green-500 hover:bg-green-600 p-2 rounded-full transition-all"
-                            >
-                                <FaInstagram className="text-[18px] text-white" />
+                            <a href="#" className="bg-green-500 p-2 rounded-full">
+                                <FaInstagram className="text-white" />
                             </a>
-                            <a
-                                href="#"
-                                className="bg-green-500 hover:bg-green-600 p-2 rounded-full transition-all"
-                            >
-                                <FaFacebook className="text-[18px] text-white" />
+
+                            <a href="#" className="bg-green-500 p-2 rounded-full">
+                                <FaFacebook className="text-white" />
                             </a>
                         </div>
 
-                        <button className="bg-white text-green-700 font-bold px-5 py-2 rounded-xl shadow hover:bg-green-600 hover:text-white transition-all">
-                            Bayar Zakat
-                        </button>
+                        <div className="bg-white/15 backdrop-blur-md border border-black/20 px-4 py-2 rounded-full text-sm font-semibold text-black">
+                            🚧 Program Renovasi Yayasan Sedang Berjalan
+                        </div>
                     </div>
                 )}
 
@@ -695,14 +690,14 @@ const Landing = () => {
                                 </a>
                             </div>
 
-                            <a
-                                href="https://wa.me/6281905056908"
+                            <button
+                                onClick={() => location.replace('/donasi')}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="mt-6 block w-full bg-gradient-to-r from-green-600 to-emerald-500 hover:opacity-95 text-white font-black py-3 rounded-2xl shadow-xl transition-all text-center"
                             >
                                 Donasi Sekarang
-                            </a>
+                            </button>
                         </div>
                     </div>
 
