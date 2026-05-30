@@ -751,14 +751,14 @@ const Donasi = () => {
                                 </a>
                             </div>
 
-                            <a
-                                href="https://wa.me/6281905056908"
+                            <button
+                                onClick={() => location.replace('/donasi')}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="mt-6 block w-full bg-gradient-to-r from-green-600 to-emerald-500 hover:opacity-95 text-white font-black py-3 rounded-2xl shadow-xl transition-all text-center"
                             >
                                 Donasi Sekarang
-                            </a>
+                            </button>
                         </div>
                     </div>
 
