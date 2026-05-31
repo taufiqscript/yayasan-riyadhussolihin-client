@@ -671,7 +671,7 @@ const Landing = () => {
 
                             <div className="flex gap-4">
                                 <a
-                                    href="#"
+                                    href="https://www.instagram.com/riyadhussolihin.cb/"
                                     className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#C13584] transition-all"
                                 >
                                     <FaInstagram className="text-white text-lg" />
