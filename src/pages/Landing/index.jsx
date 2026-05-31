@@ -64,7 +64,11 @@ const Landing = () => {
                 {!scrolled && (
                     <div className="hidden md:flex items-center justify-between max-w-7xl mx-auto px-6 md:px-10 py-3">
                         <div className="flex items-center gap-3">
-                            <a href="#" className="bg-green-500 hover:bg-[#C13584] p-2 rounded-full">
+                            <a
+                                href="https://www.instagram.com/riyadhussolihin.cb/"
+                                target="=_blank"
+                                rel="noreferrer"
+                                className="bg-green-500 hover:bg-[#C13584] p-2 rounded-full">
                                 <FaInstagram className="text-white" />
                             </a>
 
