@@ -64,11 +64,11 @@ const Landing = () => {
                 {!scrolled && (
                     <div className="hidden md:flex items-center justify-between max-w-7xl mx-auto px-6 md:px-10 py-3">
                         <div className="flex items-center gap-3">
-                            <a href="#" className="bg-green-500 p-2 rounded-full">
+                            <a href="#" className="bg-green-500 hover:bg-[#C13584] p-2 rounded-full">
                                 <FaInstagram className="text-white" />
                             </a>
 
-                            <a href="#" className="bg-green-500 p-2 rounded-full">
+                            <a href="#" className="bg-green-500 hover:bg-blue-600 p-2 rounded-full">
                                 <FaFacebook className="text-white" />
                             </a>
                         </div>
@@ -668,14 +668,14 @@ const Landing = () => {
                             <div className="flex gap-4">
                                 <a
                                     href="#"
-                                    className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-green-600 transition-all"
+                                    className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#C13584] transition-all"
                                 >
                                     <FaInstagram className="text-white text-lg" />
                                 </a>
 
                                 <a
                                     href="#"
-                                    className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-green-600 transition-all"
+                                    className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-600 transition-all"
                                 >
                                     <FaFacebook className="text-white text-lg" />
                                 </a>

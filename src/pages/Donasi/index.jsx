@@ -592,14 +592,14 @@ const Donasi = () => {
 
                                 <a
                                     href="#"
-                                    className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-green-600 hover:text-white transition-all"
+                                    className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#C13584] hover:text-white transition-all"
                                 >
                                     <FaInstagram className="text-xl" />
                                 </a>
 
                                 <a
                                     href="#"
-                                    className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-green-600 hover:text-white transition-all"
+                                    className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"
                                 >
                                     <FaFacebook className="text-xl" />
                                 </a>
@@ -655,12 +655,12 @@ const Donasi = () => {
                             <button
                                 onClick={() => setShowQRIS(false)}
                                 className="
-                        absolute -top-4 -right-4
+                        absolute sm:top-6 -top-4 sm:-right-2.5 -right-4
                         w-12 h-12
                         rounded-full
-                        bg-white text-black
+                        bg-white hover:bg-gray-50 text-black
                         font-black
-                        shadow-lg
+                        shadow-lg 
                     "
                             >
                                 ✕
@@ -729,14 +729,14 @@ const Donasi = () => {
                             <div className="flex gap-4">
                                 <a
                                     href="#"
-                                    className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-green-600 transition-all"
+                                    className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#C13584] transition-all"
                                 >
                                     <FaInstagram className="text-white text-lg" />
                                 </a>
 
                                 <a
                                     href="#"
-                                    className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-green-600 transition-all"
+                                    className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-blue-600 transition-all"
                                 >
                                     <FaFacebook className="text-white text-lg" />
                                 </a>
