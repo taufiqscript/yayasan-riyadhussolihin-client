@@ -730,7 +730,7 @@ const Donasi = () => {
 
                             <div className="flex gap-4">
                                 <a
-                                    href="https://www.instagram.com/riyadhussolihin.cb/"
+                                    href="https://www.instagram.com/riyadhussolihin.cb?igsh=MXA3ZHNqZ2R0N3NmOQ==/"
                                     target='_blank'
                                     rel='noreferrer'
                                     className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#C13584] transition-all"
